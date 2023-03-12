@@ -24,3 +24,5 @@ C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\Gra
 C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\GranitInvest\obj\Debug\CustomControls\BindablePasswordBox.baml
 C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\GranitInvest\obj\Debug\View\MainView.g.cs
 C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\GranitInvest\obj\Debug\View\MainView.baml
+C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\GranitInvest\obj\Debug\View\RegistrationView.g.cs
+C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\GranitInvest\obj\Debug\View\RegistrationView.baml

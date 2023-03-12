@@ -80,7 +80,7 @@ namespace GranitInvest.ViewModel
 
             else
             {
-                ErrorMessage = "* Netačno korisničko ime ili šifra!";
+                ErrorMessage = "* Netačno korisničko ime ili lozinka!";
             }
         }
 

@@ -17,10 +17,10 @@ namespace GranitInvest.Repository
         {
             bool validUser;
 
-            if (!File.Exists("test.sqlite3"))
-                SQLiteConnection.CreateFile("./test.sqlite3");
+            if (!File.Exists("baza.sqlite3"))
+                SQLiteConnection.CreateFile("./baza.sqlite3");
 
-            const string databaseFilePath = "./test.sqlite3";
+            const string databaseFilePath = "./baza.sqlite3";
 
             using var databaseConnection = new SQLiteConnection("Data Source=" + databaseFilePath);
             databaseConnection.Open();
@@ -43,7 +43,25 @@ namespace GranitInvest.Repository
 
         public void Add(UserModel userModel)
         {
-            throw new NotImplementedException();
+            if (!File.Exists("baza.sqlite3"))
+                SQLiteConnection.CreateFile("./baza.sqlite3");
+
+            const string databaseFilePath = "./baza.sqlite3";
+
+            using var databaseConnection = new SQLiteConnection("Data Source=" + databaseFilePath);
+            databaseConnection.Open();
+
+            const string insertStatement =
+                "insert into User(username, password, email, name, surname) values (@username, @password, @email, @name, @surname)";
+            using var insertCommand = new SQLiteCommand(insertStatement, databaseConnection);
+
+            insertCommand.Parameters.AddWithValue("@Username", userModel.Username);
+            insertCommand.Parameters.AddWithValue("@Password", userModel.Password);
+            insertCommand.Parameters.AddWithValue("@Email", userModel.Email);
+            insertCommand.Parameters.AddWithValue("@Name", userModel.Name);
+            insertCommand.Parameters.AddWithValue("@Surname", userModel.Surname);
+            insertCommand.ExecuteNonQuery();
+
         }
 
         public void Edit(UserModel userModel)

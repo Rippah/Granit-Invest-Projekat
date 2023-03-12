@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using GranitInvest.View;
 
 namespace GranitInvest.VIew
 {
@@ -12,6 +13,8 @@ namespace GranitInvest.VIew
         {
             InitializeComponent();
         }
+
+        private protected RegistrationView registrationView = new RegistrationView();
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -34,7 +37,10 @@ namespace GranitInvest.VIew
 
         }
 
-
-
+        private void ButtonRegisterPage_Click(object sender, RoutedEventArgs e)
+        {
+            registrationView.Show();
+            Close();
+        }
     }
 }
