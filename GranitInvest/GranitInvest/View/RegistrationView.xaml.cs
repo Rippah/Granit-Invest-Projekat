@@ -38,7 +38,7 @@ namespace GranitInvest.View
             {
                 if (loginView.IsVisible == false && loginView.IsLoaded)
                 {
-                    var mainView = new MainView();
+                    var mainView = new GatheringsView();
                     mainView.Show();
                     loginView.Close();
                 }
@@ -104,7 +104,7 @@ namespace GranitInvest.View
                         TxtErrorMessage.Text = "";
                         string pword = new System.Net.NetworkCredential(string.Empty, password).Password;
                         IUserRepository userRepository = new UserRepository();
-                        userRepository.Add(new UserModel(1, username, pword, email, name, surname));
+                        userRepository.Add(new User(1, username, pword, email, name, surname));
                         LoginView loginView = new LoginView();
                         loginView.Show();
                         loginView.TxtError.Text = "Registracija je uspešna!";
@@ -113,7 +113,7 @@ namespace GranitInvest.View
                             if (loginView.IsVisible == false && loginView.IsLoaded)
                             {
                                 loginView.TxtError.Text = "";
-                                var mainView = new MainView();
+                                var mainView = new GatheringsView();
                                 mainView.Show();
                                 loginView.Close();
                             }

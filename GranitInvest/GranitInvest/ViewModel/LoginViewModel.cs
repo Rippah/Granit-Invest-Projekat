@@ -13,7 +13,7 @@ namespace GranitInvest.ViewModel
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
-        private IUserRepository userRepository;
+        private readonly IUserRepository _userRepository;
 
         public string Username
         {
@@ -59,7 +59,7 @@ namespace GranitInvest.ViewModel
 
         public LoginViewModel()
         {
-            userRepository = new UserRepository();
+            _userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoverPasswordCommand = new ViewModelCommand(p=>ExecuteRecoverPassCommand("", ""));
         }
@@ -70,7 +70,7 @@ namespace GranitInvest.ViewModel
         }
         private void ExecuteLoginCommand(object obj)
         {
-            var isValidUser = userRepository.AuthenticateUser(new System.Net.NetworkCredential(Username, Password));
+            var isValidUser = _userRepository.AuthenticateUser(new System.Net.NetworkCredential(Username, Password));
             if (isValidUser)
             {
                 Thread.CurrentPrincipal = new GenericPrincipal(

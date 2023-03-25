@@ -1,6 +1,6 @@
 ﻿namespace GranitInvest.Model
 {
-    public class UserModel
+    public class User
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -10,14 +10,14 @@
         public string Surname { get; set; }
 
 
-        public UserModel(int id, string username, string password)
+        public User(int id, string username, string password)
         {
             Id = id;
             Username = username;
             Password = password;
         }
 
-        public UserModel(int id, string username, string password, string email, string name, string surname) : this(id, username, password)
+        public User(int id, string username, string password, string email, string name, string surname) : this(id, username, password)
         {
             Email = email;
             Name = name;

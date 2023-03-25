@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data.SQLite;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using GranitInvest.Model;
 
 namespace GranitInvest.Repository
@@ -15,14 +10,8 @@ namespace GranitInvest.Repository
     {
         public bool AuthenticateUser(NetworkCredential credential)
         {
-            bool validUser;
 
-            if (!File.Exists("baza.sqlite3"))
-                SQLiteConnection.CreateFile("./baza.sqlite3");
-
-            const string databaseFilePath = "./baza.sqlite3";
-
-            using var databaseConnection = new SQLiteConnection("Data Source=" + databaseFilePath);
+            using var databaseConnection = GetConnection();
             databaseConnection.Open();
 
             const string selectStatement = "select * from User where username = @username and password = @password";
@@ -32,23 +21,12 @@ namespace GranitInvest.Repository
             selectCommand.Parameters.AddWithValue("@Password", credential.Password);
             using var selectReader = selectCommand.ExecuteReader();
 
-            var selectedUsers = new List<UserModel>();
-
-            while (selectReader.Read())
-            {
-                selectedUsers.Add(new UserModel(selectReader.GetInt32(0), selectReader.GetString(1), selectReader.GetString(2)));
-            }
-            return validUser = selectedUsers.Capacity == 0 ? false : true;
+            return selectReader.Read() && selectReader["Username"] != DBNull.Value;
         }
 
-        public void Add(UserModel userModel)
+        public void Add(User userModel)
         {
-            if (!File.Exists("baza.sqlite3"))
-                SQLiteConnection.CreateFile("./baza.sqlite3");
-
-            const string databaseFilePath = "./baza.sqlite3";
-
-            using var databaseConnection = new SQLiteConnection("Data Source=" + databaseFilePath);
+            using var databaseConnection = GetConnection();
             databaseConnection.Open();
 
             const string insertStatement =
@@ -64,7 +42,7 @@ namespace GranitInvest.Repository
 
         }
 
-        public void Edit(UserModel userModel)
+        public void Edit(User userModel)
         {
             throw new NotImplementedException();
         }
@@ -74,17 +52,38 @@ namespace GranitInvest.Repository
             throw new NotImplementedException();
         }
 
-        public UserModel GetById(int id)
+        public User GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public UserModel GetByUsername(string username)
+        public User GetByUsername(string username)
         {
-            throw new NotImplementedException();
+            User user = null!;
+            using var databaseConnection = GetConnection();
+            databaseConnection.Open();
+            var selectCommand = databaseConnection.CreateCommand();
+            selectCommand.CommandText = @"SELECT * FROM User WHERE Username = $Username";
+
+            selectCommand.Parameters.AddWithValue("$Username", username);
+            using var selectReader = selectCommand.ExecuteReader();
+
+            if (selectReader.Read())
+            {
+                user = new User(
+                    selectReader.GetInt32(0),
+                    selectReader.GetString(1),
+                    string.Empty,
+                    selectReader.GetString(3),
+                    selectReader.GetString(4),
+                    selectReader.GetString(5)
+                );
+            }
+
+            return user;
         }
 
-        public IEnumerable<UserModel> GetByAll()
+        public IEnumerable<User> GetByAll()
         {
             throw new NotImplementedException();
         }

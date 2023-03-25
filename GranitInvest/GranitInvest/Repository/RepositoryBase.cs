@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace GranitInvest.Repository
 {
     public abstract class RepositoryBase
     {
-        private readonly string _connectionString;
+        private const string DatabasePath = "../../Resources/Data/user_data.sqlite3";
+        private const string ConnectionString = $"Data Source={DatabasePath}";
 
-        public RepositoryBase()
+        protected SQLiteConnection GetConnection()
         {
-            _connectionString = "Server=(local); Database=MVVMLoginDb; Integrated Security = true";
-        }
-
-        protected SqlConnection GetConnection()
-        {
-            return new SqlConnection(_connectionString);
+            return new SQLiteConnection(ConnectionString);
         }
     }
 }

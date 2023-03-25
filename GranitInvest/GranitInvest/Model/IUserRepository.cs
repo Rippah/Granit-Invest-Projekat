@@ -10,11 +10,11 @@ namespace GranitInvest.Model
     internal interface IUserRepository
     {
         bool AuthenticateUser(NetworkCredential credential);
-        void Add(UserModel userModel);
-        void Edit(UserModel userModel);
+        void Add(User userModel);
+        void Edit(User userModel);
         void Remove(int id);
-        UserModel GetById(int id);
-        UserModel GetByUsername(string username);
-        IEnumerable<UserModel> GetByAll();
+        User GetById(int id);
+        User GetByUsername(string username);
+        IEnumerable<User> GetByAll();
     }
 }
