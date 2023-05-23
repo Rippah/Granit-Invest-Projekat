@@ -76,7 +76,8 @@ namespace GranitInvest.Repository
                     string.Empty,
                     selectReader.GetString(3),
                     selectReader.GetString(4),
-                    selectReader.GetString(5)
+                    selectReader.GetString(5),
+                    selectReader.GetInt32(6) == 1
                 );
             }
 

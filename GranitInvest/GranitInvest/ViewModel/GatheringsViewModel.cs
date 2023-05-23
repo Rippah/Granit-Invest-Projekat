@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using GranitInvest.Model;
 using GranitInvest.Repository;
-using TravelAgency.Model;
 
 namespace GranitInvest.ViewModel
 {
@@ -17,6 +17,7 @@ namespace GranitInvest.ViewModel
             {
                 var dt = new DataTable();
                 dt = _gatheringsRepository.GetAll(dt);
+                ConvertGatheringsColumn(dt, "Profile", typeof(string), "Profile");
                 ConvertGatheringsColumn(dt, "Link", typeof(string), "Link");
 
                 return dt.DefaultView;
@@ -30,6 +31,7 @@ namespace GranitInvest.ViewModel
             return gatheringsParameter switch
             {
                 "Link" => "Link",
+                "Profile" => "Link",
                 _ => ""
             };
         }

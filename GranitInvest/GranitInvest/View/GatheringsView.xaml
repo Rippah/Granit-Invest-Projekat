@@ -11,6 +11,7 @@
     AllowsTransparency="True"
     Background="Transparent"
     MouseDown="Window_MouseDown"
+    PreviewKeyDown="GatheringsView_OnPreviewKeyDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -34,17 +35,17 @@
             Opacity="0.95">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                    <GradientStop Offset="0" Color="#ff781f" />
-                    <GradientStop Offset="0.7" Color="#ffb347" />
-                    <GradientStop Offset="1" Color="#fedebe" />
+                    <GradientStop Offset="0" Color="#f2c506" />
+                    <GradientStop Offset="0.7" Color="#f8ca0a" />
+                    <GradientStop Offset="1" Color="#fbe68c" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 0">
-                    <GradientStop Offset="0" Color="#010101" />
-                    <GradientStop Offset="0.15" Color="#1c1c1c" />
-                    <GradientStop Offset="0.7" Color="#3a3b3c" />
-                    <GradientStop Offset="1" Color="#4a4a4a" />
+                    <GradientStop Offset="0" Color="#152245" />
+                    <GradientStop Offset="0.15" Color="#152238" />
+                    <GradientStop Offset="0.7" Color="#192841" />
+                    <GradientStop Offset="1" Color="#1c2e4a" />
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -70,7 +71,7 @@
                         VerticalAlignment="Center"
                         FontFamily="Montserrat"
                         FontSize="16"
-                        Foreground="DarkOrange"
+                        Foreground="#f8ca0a"
                         Text="SKUPOVI" />
 
                     <Button
@@ -78,7 +79,6 @@
                         Grid.Column="1"
                         BorderThickness="0"
                         Click="BtnMinimize_Click"
-                        Content="-"
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
@@ -86,10 +86,10 @@
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="DarkOrange" />
+                                <Setter Property="Background" Value="#f2c506" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="SlateGray" />
+                                        <Setter Property="Background" Value="DarkOrange" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -114,7 +114,6 @@
                         Grid.Column="2"
                         BorderThickness="0"
                         Click="BtnClose_Click"
-                        Content="X"
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
@@ -125,7 +124,7 @@
                                 <Setter Property="Background" Value="OrangeRed" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="SlateGray" />
+                                        <Setter Property="Background" Value="Red" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -152,72 +151,184 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="30">
                         <Button
-                            Margin="0,10,0,0"
-                            Padding="10"
-                            Background="DarkOrange"
-                            Click="AddGatherings_OnClick"
+                            x:Name="BtnContact"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
+                            Click="Contact_OnClick"
+                            Content="KONTAKT"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="19"
+                            FontWeight="Medium"
                             Foreground="DimGray">
-                            <TextBlock
-                                FontFamily="Montserrat"
-                                FontSize="25"
-                                FontWeight="Medium"
-                                Text="Dodajte Novi Skup"
-                                TextAlignment="Center" />
 
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10" />
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#f8ca0a" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#f2b500" />
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </Button.Resources>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        Width="250"
+                                        Height="45"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="12">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
                         </Button>
 
                         <Button
-                            Margin="0,10,0,0"
-                            Padding="10"
-                            Background="DarkOrange"
+                            x:Name="BtnLogout"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
                             Click="LogOut_OnClick"
+                            Content="ODJAVITE SE"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="19"
+                            FontWeight="Medium"
                             Foreground="DimGray">
-                            <TextBlock
-                                FontFamily="Montserrat"
-                                FontSize="25"
-                                FontWeight="Medium"
-                                Text="Odjavite Se"
-                                TextAlignment="Center" />
 
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10" />
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#f8ca0a" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#f2b500" />
+                                        </Trigger>
+                                    </Style.Triggers>
                                 </Style>
-                            </Button.Resources>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        Width="250"
+                                        Height="45"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="12">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button
+                            x:Name="BtnAddGatherings"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
+                            Click="AddGatherings_OnClick"
+                            Content="DODAJTE NOVI SKUP"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="19"
+                            FontWeight="Medium"
+                            Foreground="DimGray">
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#f8ca0a" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#f2b500" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        Width="250"
+                                        Height="45"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="12">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button
+                            x:Name="BtnAddUser"
+                            Margin="0,15,0,0"
+                            BorderThickness="0"
+                            Click="AddUser_OnClick"
+                            Content="DODAJTE NOVOG ADMINA"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="19"
+                            FontWeight="Medium"
+                            Foreground="DimGray">
+
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="#f8ca0a" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#f2b500" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                        Width="250"
+                                        Height="45"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="12">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
                         </Button>
                     </StackPanel>
                     <DataGrid
                         Name="MainDataGrid"
                         Grid.Column="1"
-                        Margin="20"
+                        Margin="15"
                         AutoGenerateColumns="False"
-                        Background="DimGray"
+                        Background="#152238"
                         CanUserAddRows="False"
                         FontSize="16"
-                        Foreground="DarkOrange"
+                        FontWeight="Bold"
+                        Foreground="#f8ca0a"
                         HeadersVisibility="Column"
+                        HorizontalGridLinesBrush="Gold"
                         ItemsSource="{Binding Skupovi}"
-                        RowBackground="Transparent">
+                        RowBackground="Transparent"
+                        VerticalGridLinesBrush="Gold">
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell">
-                                <Setter Property="Background" Value="DimGray" />
+                                <Setter Property="Background" Value="#152238" />
                                 <Style.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="DarkOrange" />
-                                        <Setter Property="Foreground" Value="DimGray" />
+                                        <Setter Property="Background" Value="#f8ca0a" />
+                                        <Setter Property="Foreground" Value="#152238" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.CellStyle>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="MinHeight" Value="40" />
+                            </Style>
+                        </DataGrid.RowStyle>
                         <DataGrid.Resources>
                             <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Foreground" Value="DimGray" />
-                                <Setter Property="Background" Value="DarkOrange" />
+                                <Setter Property="Background" Value="#f8ca0a" />
+                                <Setter Property="Foreground" Value="#152238" />
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
@@ -228,6 +339,7 @@
                                 IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
                                         <Setter Property="HorizontalAlignment" Value="Center" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
@@ -239,7 +351,7 @@
                                 IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
@@ -250,10 +362,36 @@
                                 IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
                                         <Setter Property="HorizontalAlignment" Value="Center" />
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="Auto"
+                                Binding="{Binding Path=Location}"
+                                Header="Lokacija"
+                                IsReadOnly="True">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridHyperlinkColumn
+                                Width="Auto"
+                                Binding="{Binding Path=Profile}"
+                                Header="Instagram"
+                                IsReadOnly="True">
+                                <DataGridHyperlinkColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <EventSetter Event="Hyperlink.Click" Handler="OnProfileClick" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridHyperlinkColumn.ElementStyle>
+                            </DataGridHyperlinkColumn>
                             <DataGridHyperlinkColumn
                                 Width="Auto"
                                 Binding="{Binding Path=Link}"
@@ -261,7 +399,8 @@
                                 IsReadOnly="True">
                                 <DataGridHyperlinkColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
-                                        <EventSetter Event="Hyperlink.Click" Handler="OnHyperlinkClick" />
+                                        <EventSetter Event="Hyperlink.Click" Handler="OnLinkClick" />
+                                        <Setter Property="TextWrapping" Value="Wrap" />
                                         <Setter Property="HorizontalAlignment" Value="Center" />
                                     </Style>
                                 </DataGridHyperlinkColumn.ElementStyle>
@@ -278,16 +417,16 @@
                         VerticalAlignment="Center"
                         FontFamily="Montserrat"
                         FontSize="30"
-                        Foreground="DarkOrange"
+                        Foreground="#f8ca0a"
                         Text="{Binding LoadCurrentUsername}" />
 
                     <StackPanel
                         Width="250"
-                        Margin="0,-25,-1100,0"
+                        Margin="0,20,-1100,0"
                         Orientation="Vertical">
                         <Image
-                            Width="150"
-                            Height="150"
+                            Width="75"
+                            Height="75"
                             Source="/Resources/Images/icon.png" />
                     </StackPanel>
                 </Grid>

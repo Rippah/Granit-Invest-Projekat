@@ -1,23 +1,19 @@
-﻿using System.ComponentModel;
-using System.Security;
-using System.Text.RegularExpressions;
-using System.Threading;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using GranitInvest.Model;
 using GranitInvest.Repository;
-using GranitInvest.VIew;
+using GranitInvest.ViewModel;
 
 namespace GranitInvest.View
 {
-    /// <summary>
-    /// Interaction logic for RegistrationView.xaml
-    /// </summary>
     public partial class RegistrationView
     {
         public RegistrationView()
         {
             InitializeComponent();
+            DataContext = new RegisterViewModel();
+            TxtUser.Focus();
         }
 
         private void BtnMinimize_Click(object sender, RoutedEventArgs e)
@@ -30,19 +26,10 @@ namespace GranitInvest.View
             Application.Current.Shutdown();
         }
 
-        private void ButtonLoginPage_Click(object sender, RoutedEventArgs e)
+        private void ButtonGatheringsView_Click(object sender, RoutedEventArgs e)
         {
-            LoginView loginView = new LoginView();
-            loginView.Show();
-            loginView.IsVisibleChanged += (s, ev) =>
-            {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
-                {
-                    var mainView = new GatheringsView();
-                    mainView.Show();
-                    loginView.Close();
-                }
-            };
+            var gatheringsView = new GatheringsView();
+            gatheringsView.Show();
             Close();
         }
 
@@ -67,11 +54,11 @@ namespace GranitInvest.View
             }
             else
             {
-                string username = TxtUser.Text;
-                SecureString password = TxtPassword.Password;
-                string name = TxtIme.Text;
-                string surname = TxtPrezime.Text;
-                string email = TxtEmail.Text;
+                var username = TxtUser.Text;
+                var password = TxtPassword.Password;
+                var name = TxtIme.Text;
+                var surname = TxtPrezime.Text;
+                var email = TxtEmail.Text;
 
                 if (password == null)
                 {
@@ -104,23 +91,26 @@ namespace GranitInvest.View
                         TxtErrorMessage.Text = "";
                         string pword = new System.Net.NetworkCredential(string.Empty, password).Password;
                         IUserRepository userRepository = new UserRepository();
-                        userRepository.Add(new User(1, username, pword, email, name, surname));
-                        LoginView loginView = new LoginView();
-                        loginView.Show();
-                        loginView.TxtError.Text = "Registracija je uspešna!";
-                        loginView.IsVisibleChanged += (s, ev) =>
-                        {
-                            if (loginView.IsVisible == false && loginView.IsLoaded)
-                            {
-                                loginView.TxtError.Text = "";
-                                var mainView = new GatheringsView();
-                                mainView.Show();
-                                loginView.Close();
-                            }
-                        };
+                        userRepository.Add(new User(1, username, pword, email, name, surname, true));
+                        MessageBox.Show("Registracija je uspešna.");
+                        var gatheringsView = new GatheringsView();
+                        gatheringsView.Show();
                         Close();
                     }
                 }
+            }
+        }
+
+        private void RegistrationView_OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) 
+                SignUp_Click(sender, e);
+            if (e.Key == Key.F1)
+                ButtonGatheringsView_Click(sender, e);
+            if (e.Key == Key.Tab && TxtPrezime.IsFocused)
+            {
+                TxtUser.Focus();
+                e.Handled = true;
             }
         }
     }

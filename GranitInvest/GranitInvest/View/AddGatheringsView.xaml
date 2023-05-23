@@ -1,0 +1,363 @@
+﻿<Window
+    x:Class="GranitInvest.View.AddGatheringsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="RegistrationView"
+    Width="900"
+    Height="850"
+    AllowsTransparency="True"
+    Background="Transparent"
+    MouseDown="Window_MouseDown"
+    PreviewKeyDown="AddGatheringsView_OnPreviewKeyDown"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Border CornerRadius="35">
+        <Border.Background>
+            <ImageBrush
+                AlignmentX="Left"
+                ImageSource="/Resources/Images/background_image.jpg"
+                Stretch="UniformToFill" />
+        </Border.Background>
+        <Border
+            BorderThickness="4"
+            CornerRadius="25"
+            Opacity="0.95">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Offset="0" Color="#f2c506" />
+                    <GradientStop Offset="0.7" Color="#f8ca0a" />
+                    <GradientStop Offset="1" Color="#fbe68c" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 0">
+                    <GradientStop Offset="0" Color="#152245" />
+                    <GradientStop Offset="0.15" Color="#152238" />
+                    <GradientStop Offset="0.7" Color="#192841" />
+                    <GradientStop Offset="1" Color="#1c2e4a" />
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="5" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Column="0"
+                        Margin="20,0,0,0"
+                        VerticalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontSize="14"
+                        Foreground="#f8ca0a"
+                        Text="DODAJTE NOVI SKUP" />
+
+                    <Button
+                        x:Name="BtnMinimize"
+                        Grid.Column="1"
+                        BorderThickness="0"
+                        Click="BtnMinimize_Click"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        Foreground="Black">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#f8ca0a" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkOrange" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="18"
+                                    Height="18"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+
+                    <Button
+                        x:Name="BtnClose"
+                        Grid.Column="2"
+                        BorderThickness="0"
+                        Click="BtnClose_Click"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        Foreground="Black">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="18"
+                                    Height="18"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="9">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </Grid>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Width="250"
+                    Margin="0,50,0,0"
+                    Orientation="Vertical">
+                    <Image
+                        Width="150"
+                        Height="80"
+                        Source="/Resources/Images/logo.png" />
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Skupovi za mlade na temu pravoslavne duhovnosti"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Naziv"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="TxtName"
+                        Height="28"
+                        Margin="0,5,0,0"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0,0,0,1"
+                        CaretBrush="#f8ca0a"
+                        FontFamily="Montserrat"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Opis"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="TxtDesc"
+                        Height="28"
+                        Margin="0,5,0,0"
+                        VerticalContentAlignment="Center"
+                        AcceptsReturn="True"
+                        Background="Transparent"
+                        BorderThickness="0,0,0,1"
+                        CaretBrush="#f8ca0a"
+                        FontFamily="Montserrat"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Datum"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="TxtDate"
+                        Height="28"
+                        Margin="0,5,0,0"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0,0,0,1"
+                        CaretBrush="#f8ca0a"
+                        FontFamily="Montserrat"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="{Binding Date, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Lokacija"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="TxtLocation"
+                        Height="28"
+                        Margin="0,5,0,0"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0,0,0,1"
+                        CaretBrush="#f8ca0a"
+                        FontFamily="Montserrat"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Instagram Nalog"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="TxtProfile"
+                        Height="28"
+                        Margin="0,5,0,0"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0,0,0,1"
+                        CaretBrush="#f8ca0a"
+                        FontFamily="Montserrat"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="{Binding Profile, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="Link za Učestvovanje"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="TxtLink"
+                        Height="28"
+                        Margin="0,5,0,0"
+                        VerticalContentAlignment="Center"
+                        Background="Transparent"
+                        BorderThickness="0,0,0,1"
+                        CaretBrush="#f8ca0a"
+                        FontFamily="Montserrat"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Foreground="#f8ca0a"
+                        Text="{Binding Link, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock
+                        Name="TxtErrorMessage"
+                        Margin="0,30,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="DarkRed"
+                        Text="{Binding ErrorMessage}"
+                        TextWrapping="Wrap" />
+
+                    <Button
+                        x:Name="BtnFinalize"
+                        Margin="0,15,0,0"
+                        BorderThickness="0"
+                        Click="Finalize_Click"
+                        Content="POTVRDITE"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        FontWeight="Medium"
+                        Foreground="#152238">
+
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="SlateGray" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#f8ca0a" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border
+                                    Width="150"
+                                    Height="25"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="12">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <TextBlock
+                        Margin="0,35,0,0"
+                        HorizontalAlignment="Center"
+                        FontFamily="Montserrat"
+                        FontWeight="Medium">
+                        <Hyperlink Click="ButtonReturnToGatheringsView_OnClick" FontSize="12">
+                            <Hyperlink.Style>
+                                <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="Hyperlink">
+                                    <Setter Property="Foreground" Value="DarkGray" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#f8ca0a" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Hyperlink.Style>
+                            Odustali ste od unosa? Kliknite ovde.
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+        </Border>
+    </Border>
+</Window>
+

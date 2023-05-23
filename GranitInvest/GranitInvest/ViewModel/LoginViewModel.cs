@@ -53,15 +53,11 @@ namespace GranitInvest.ViewModel
 
 
         public ICommand LoginCommand { get; }
-        public ICommand RecoverPasswordCommand { get; }
-        public ICommand ShowPasswordCommand { get; }
-        public ICommand RememberPasswordCommand { get; }
 
         public LoginViewModel()
         {
             _userRepository = new UserRepository();
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
-            RecoverPasswordCommand = new ViewModelCommand(p=>ExecuteRecoverPassCommand("", ""));
         }
         private bool CanExecuteLoginCommand(object obj)
         {
@@ -84,10 +80,5 @@ namespace GranitInvest.ViewModel
             }
         }
 
-        private void ExecuteRecoverPassCommand(string username, string email)
-        {
-            throw new System.NotImplementedException();
-        }
-        
     }
 }

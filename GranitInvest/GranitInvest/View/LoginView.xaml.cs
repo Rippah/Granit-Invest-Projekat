@@ -4,23 +4,19 @@ using GranitInvest.Model;
 using GranitInvest.Repository;
 using GranitInvest.View;
 using GranitInvest.ViewModel;
-using TravelAgency.Model;
 
 namespace GranitInvest.VIew
 {
-    /// <summary>
-    /// Interaction logic for LoginView.xaml
-    /// </summary>
     public partial class LoginView
     {
         public LoginView()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
+            TxtUser.Text = "gost";
+            TxtUser.CaretIndex = TxtUser.Text.Length;
+            TxtUser.Focus();
         }
-
-        private protected UserRepository UserRepository = new UserRepository();
-        private protected LoginViewModel LoginViewModel = new LoginViewModel();
-        private protected RegistrationView RegistrationView = new RegistrationView();
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -46,18 +42,12 @@ namespace GranitInvest.VIew
                 TxtUser.Focus();
             }
 
-            else if (string.IsNullOrEmpty(TxtPassword.Password.ToString()))
-            {
-                TxtError.Text = "You haven't entered the password.";
-                TxtPassword.Focus();
-            }
-
             else
             {
                 var username = TxtUser.Text;
                 var password = TxtPassword.Password;
 
-                if (username.Length < 3 || password.Length < 3)
+                if (username.Length < 3)
                 {
                     TxtError.Text = "Username or password is too short.";
                 }
@@ -71,6 +61,7 @@ namespace GranitInvest.VIew
                         CurrentUser.Id = userRepository.GetByUsername(username).Id;
                         CurrentUser.Username = username;
                         CurrentUser.DisplayName = userRepository.GetByUsername(username).Name;
+                        CurrentUser.IsAdmin = userRepository.GetByUsername(username).IsAdmin;
 
                         var gatheringsView = new GatheringsView();
                         gatheringsView.Show();
@@ -84,10 +75,10 @@ namespace GranitInvest.VIew
             }
         }
 
-        private void ButtonRegisterPage_Click(object sender, RoutedEventArgs e)
+        private void LoginView_OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            RegistrationView.Show();
-            Close();
+            if (e.Key == Key.Enter)
+                BtnLogin_Click(sender, e);
         }
     }
 }

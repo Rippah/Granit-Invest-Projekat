@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\dzoni\OneDrive\Dokumenti\GitHub\Granit-Invest-Projekat\GranitInvest\GranitInvest\App.xaml
-51219600627
+6-2028335880
 
-23-454171066
+24-437385679
 141377553972
-CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;View\GatheringsView.xaml;View\LoginView.xaml;View\RegistrationView.xaml;
+CustomControls\BindablePasswordBox.xaml;MainWindow.xaml;View\AddGatheringsView.xaml;View\GatheringsView.xaml;View\LoginView.xaml;View\RegistrationView.xaml;
 
-True
+False
 

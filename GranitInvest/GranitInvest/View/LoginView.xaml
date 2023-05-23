@@ -12,6 +12,7 @@
     AllowsTransparency="True"
     Background="Transparent"
     MouseDown="Window_MouseDown"
+    PreviewKeyDown="LoginView_OnPreviewKeyDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -45,17 +46,17 @@
             Opacity="0.95">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                    <GradientStop Offset="0" Color="#ff781f" />
-                    <GradientStop Offset="0.7" Color="#ffb347" />
-                    <GradientStop Offset="1" Color="#fedebe" />
+                    <GradientStop Offset="0" Color="#f2c506" />
+                    <GradientStop Offset="0.7" Color="#f8ca0a" />
+                    <GradientStop Offset="1" Color="#fbe68c" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
             <Border.Background>
                 <LinearGradientBrush StartPoint="0, 1" EndPoint="1, 0">
-                    <GradientStop Offset="0" Color="#010101" />
-                    <GradientStop Offset="0.15" Color="#1c1c1c" />
-                    <GradientStop Offset="0.7" Color="#3a3b3c" />
-                    <GradientStop Offset="1" Color="#4a4a4a" />
+                    <GradientStop Offset="0" Color="#152245" />
+                    <GradientStop Offset="0.15" Color="#152238" />
+                    <GradientStop Offset="0.7" Color="#192841" />
+                    <GradientStop Offset="1" Color="#1c2e4a" />
                 </LinearGradientBrush>
             </Border.Background>
 
@@ -79,7 +80,7 @@
                         VerticalAlignment="Center"
                         FontFamily="Montserrat"
                         FontSize="14"
-                        Foreground="DarkOrange"
+                        Foreground="#f8ca0a"
                         Text="PRIJAVA" />
 
                     <Button
@@ -87,7 +88,6 @@
                         Grid.Column="1"
                         BorderThickness="0"
                         Click="BtnMinimize_Click"
-                        Content="-"
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
@@ -95,10 +95,10 @@
 
                         <Button.Style>
                             <Style TargetType="Button">
-                                <Setter Property="Background" Value="DarkOrange" />
+                                <Setter Property="Background" Value="#f2c506" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="SlateGray" />
+                                        <Setter Property="Background" Value="DarkOrange" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -123,7 +123,6 @@
                         Grid.Column="2"
                         BorderThickness="0"
                         Click="BtnClose_Click"
-                        Content="X"
                         Cursor="Hand"
                         FontFamily="Montserrat"
                         FontSize="12"
@@ -134,7 +133,7 @@
                                 <Setter Property="Background" Value="OrangeRed" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="SlateGray" />
+                                        <Setter Property="Background" Value="Red" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -158,40 +157,27 @@
                 <StackPanel
                     Grid.Row="1"
                     Width="250"
-                    Margin="635,395,0,0"
+                    Margin="0,50,0,0"
                     Orientation="Vertical">
                     <Image
                         Width="150"
-                        Height="150"
-                        Source="/Resources/Images/icon.png" />
-                </StackPanel>
-                <StackPanel
-                    Grid.Row="1"
-                    Width="250"
-                    Margin="0,100,0,0"
-                    Orientation="Vertical">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        FontFamily="Montserrat"
-                        FontSize="25"
-                        FontWeight="Bold"
-                        Foreground="DimGray"
-                        Text="GRANIT INVEST" />
+                        Height="80"
+                        Source="/Resources/Images/logo.png" />
                     <TextBlock
                         Margin="0,10,0,0"
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
-                        Foreground="Orange"
+                        Foreground="#f8ca0a"
                         Text="Skupovi za mlade na temu pravoslavne duhovnosti"
                         TextAlignment="Center"
                         TextWrapping="Wrap" />
                     <TextBlock
-                        Margin="0,30,0,0"
+                        Margin="0,50,0,0"
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
-                        Foreground="DimGray"
+                        Foreground="#f8ca0a"
                         Text="Korisničko ime"
                         TextWrapping="Wrap" />
                     <TextBox
@@ -201,11 +187,11 @@
                         Padding="30,0,0,0"
                         VerticalContentAlignment="Center"
                         BorderThickness="0,0,0,1"
-                        CaretBrush="DimGray"
+                        CaretBrush="#f8ca0a"
                         FontFamily="Montserrat"
                         FontSize="13"
                         FontWeight="Medium"
-                        Foreground="LightGray"
+                        Foreground="#f8ca0a"
                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}">
                         <TextBox.Background>
                             <ImageBrush
@@ -219,7 +205,7 @@
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
-                        Foreground="DimGray"
+                        Foreground="#f8ca0a"
                         Text="Lozinka" />
                     <customControls:BindablePasswordBox
                         x:Name="TxtPassword"
@@ -247,14 +233,14 @@
                         FontFamily="Montserrat"
                         FontSize="12"
                         FontWeight="Medium"
-                        Foreground="Black">
+                        Foreground="#152238">
 
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Background" Value="SlateGray" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="DarkOrange" />
+                                        <Setter Property="Background" Value="#f8ca0a" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -272,26 +258,6 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-
-                    <TextBlock
-                        Margin="0,35,0,0"
-                        HorizontalAlignment="Center"
-                        FontFamily="Montserrat"
-                        FontWeight="Medium">
-                        <Hyperlink Click="ButtonRegisterPage_Click" FontSize="12">
-                            <Hyperlink.Style>
-                                <Style BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="Hyperlink">
-                                    <Setter Property="Foreground" Value="DarkGray" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Foreground" Value="DarkOrange" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Hyperlink.Style>
-                            Nemate profil? Kreirajte ga ovde.
-                        </Hyperlink>
-                    </TextBlock>
                 </StackPanel>
             </Grid>
 
